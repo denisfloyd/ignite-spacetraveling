@@ -47,7 +47,7 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
         <title>Home | SpaceTraveling Blog</title>
       </Head>
 
-      <main className={`${commonStyles.container} ${styles.container}`}>
+      <main className={`${commonStyles.container}`}>
         <section className={styles.post}>
           {posts &&
             posts.map(post => (
@@ -86,8 +86,6 @@ export const getStaticProps: GetStaticProps = async () => {
       pageSize: 5,
     }
   );
-
-  console.log(postsResponse);
 
   const posts = postsResponse.results.map(post => {
     return {
