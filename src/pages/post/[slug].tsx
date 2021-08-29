@@ -1,6 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 
 import Prismic from '@prismicio/client';
 import { RichText } from 'prismic-dom';
@@ -16,7 +15,7 @@ import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
 
 interface Post {
-  slug: string;
+  uid: string;
   first_publication_date: string | null;
   data: {
     title: string;
@@ -144,7 +143,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
   const response = await prismic.getByUID('post', String(slug), {});
 
   const post: Post = {
-    slug: response.uid,
+    uid: response.uid,
     first_publication_date: response.first_publication_date,
     data: {
       title: response.data.title,
