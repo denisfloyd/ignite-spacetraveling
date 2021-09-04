@@ -58,6 +58,11 @@ export default function Post({
           locale: ptBR,
         })
       : '',
+    last_publication_date: postFromProps.last_publication_date
+      ? format(new Date(postFromProps.last_publication_date), 'dd MMM yyyy', {
+          locale: ptBR,
+        })
+      : null,
   };
 
   const amountWordsOfBody = RichText.asText(
