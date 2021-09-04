@@ -13,10 +13,13 @@ import { getPrismicClient } from '../../services/prismic';
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
+import Comments from '../../components/Comments';
+import PreviewButton from '../../components/PreviewButton';
 
 interface Post {
   uid: string;
   first_publication_date: string | null;
+  last_publication_date: string | null;
   data: {
     title: string;
     subtitle: string;
@@ -35,14 +38,27 @@ interface Post {
 
 interface PostProps {
   post: Post;
+  preview: boolean;
 }
 
-export default function Post({ post }: PostProps): JSX.Element {
+export default function Post({
+  post: postFromProps,
+  preview,
+}: PostProps): JSX.Element {
   const router = useRouter();
 
   if (router.isFallback) {
     return <div>Carregando...</div>;
   }
+
+  const post = {
+    ...postFromProps,
+    first_publication_date: postFromProps.first_publication_date
+      ? format(new Date(postFromProps.first_publication_date), 'dd MMM yyyy', {
+          locale: ptBR,
+        })
+      : '',
+  };
 
   const amountWordsOfBody = RichText.asText(
     post.data.content.reduce((acc, data) => [...acc, ...data.body], [])
@@ -79,9 +95,7 @@ export default function Post({ post }: PostProps): JSX.Element {
           <div className={styles.postInfo}>
             <span>
               <FiCalendar size={20} color="#BBBBBB" />
-              {format(parseISO(post.first_publication_date), 'dd MMM yyyy', {
-                locale: ptBR,
-              })}
+              {post.first_publication_date}
             </span>
 
             <span>
@@ -108,6 +122,10 @@ export default function Post({ post }: PostProps): JSX.Element {
             ))}
           </div>
         </article>
+
+        <Comments />
+
+        <PreviewButton preview={preview} />
       </main>
     </>
   );
@@ -135,16 +153,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PostProps> = async ({
+  params,
+  preview = false,
+  previewData,
+}) => {
   const { slug } = params;
 
   const prismic = getPrismicClient();
 
-  const response = await prismic.getByUID('post', String(slug), {});
+  const response = await prismic.getByUID('post', String(slug), {
+    ref: previewData?.ref || null,
+  });
 
   const post: Post = {
     uid: response.uid,
     first_publication_date: response.first_publication_date,
+    last_publication_date: response.last_publication_date,
     data: {
       title: response.data.title,
       subtitle: response.data.subtitle,
@@ -157,6 +182,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
   return {
     props: {
       post,
+      preview,
     },
     revalidate: 60 * 30, // 30 minutos
   };
