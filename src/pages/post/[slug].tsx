@@ -206,7 +206,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({
       fetch: ['post.title'],
       pageSize: 1,
       after: response.id,
-      orderings: '[document.first_publication_date]',
+      orderings: '[document.first_publication_date desc]',
     }
   );
 
@@ -216,7 +216,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({
       fetch: ['post.title'],
       pageSize: 1,
       after: response.id,
-      orderings: '[document.first_publication_date desc]',
+      orderings: '[document.first_publication_date]',
     }
   );
 
