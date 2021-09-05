@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const Comments = (): any => {
+const Comments = (): JSX.Element => {
   useEffect(() => {
     // document.getElementById;
     const script = document.createElement('script');

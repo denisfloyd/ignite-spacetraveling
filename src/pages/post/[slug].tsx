@@ -74,6 +74,11 @@ export default function Post({
           locale: ptBR,
         })
       : null,
+    last_publication_hour: postFromProps.last_publication_date
+      ? format(new Date(postFromProps.last_publication_date), 'HH:mm', {
+          locale: ptBR,
+        })
+      : null,
   };
 
   const amountWordsOfBody = RichText.asText(
@@ -124,6 +129,10 @@ export default function Post({
               {readingTime} min
             </span>
           </div>
+
+          <span>
+            {`*editado em ${post.last_publication_date}, às ${post.last_publication_hour}`}
+          </span>
 
           <div className={styles.postContent}>
             {post.data.content.map(({ heading, body }) => (
