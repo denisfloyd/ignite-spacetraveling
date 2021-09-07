@@ -20,6 +20,7 @@
   <a href="#rocket-sobre-o-desafio">Sobre o desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#computer-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#construction_worker-como-executar">Como Executar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#test_tube-executar-os-testes">Executar os testes</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-licença">Licença</a>
 </p>
 
@@ -92,6 +93,15 @@ Este projeto foi construído utilizando as seguintes tecnologias:
   projeto criando se pré-configurado no projeto a criação de páginas estáticas
   
   Após executação veja o projeto no seguinte link: http://localhost:3000
+```
+
+## :test_tube: Executar os testes
+```bash
+# Instale as dependências caso já não instalou
+# Execute os testes
+$ yarn test
+ou
+$ npm run test
 ```
 
 ## :memo: Licença
