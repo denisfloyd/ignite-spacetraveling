@@ -34,7 +34,7 @@ Nesse desafio, você deverá criar uma aplicação para treinar o que 
 
 Essa será uma aplicação onde o seu principal objetivo é criar um blog do zero. Você vai receber uma aplicação praticamente em branco que deve consumir os dados do Prismic e ter a interface implementada conforme o layout do Figma. Você terá acesso a diversos arquivos para implementar:
 
-- Estilizações global, comun e individuais;
+- Estilizações global, comum e individuais;
 - Importação de fontes Google;
 - Paginação de posts;
 - Cálculo de tempo estimado de leitura do post;
